@@ -8,9 +8,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.commons.exec.PumpStreamHandler;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -51,7 +49,8 @@ public class SubTaskRunnerMojo extends AbstractMojo {
      * @required
      * @readonly
      */
-    protected File basedir;
+	@Parameter(property = "grunt-maven.basedir", defaultValue = "${project-basedir}")
+	protected File basedir;
 
 
     private org.apache.maven.project.MavenProject mavenProject;
@@ -62,7 +61,7 @@ public class SubTaskRunnerMojo extends AbstractMojo {
             params += "--env=" + System.getProperty("env");
         }
         params += " " +additionalParameters;
-        executeCommand( gruntExec + " " + task + " " + params, task );
+		executeCommand( gruntExec + " " + task + " " + params, task );
     }
 
     void executeCommand( String command, String taskName ) throws MojoExecutionException {

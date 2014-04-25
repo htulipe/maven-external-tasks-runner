@@ -7,7 +7,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.commons.exec.PumpStreamHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,6 +48,7 @@ public class SubTaskInitializerMojo extends AbstractMojo {
      * @required
      * @readonly
      */
+	@Parameter(property = "grunt-maven.basedir", defaultValue = "${project-basedir}")
     protected File basedir;
 
 
