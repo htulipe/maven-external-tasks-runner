@@ -7,10 +7,10 @@
 	</parent>
 
     <groupId>com.worldline.maven.plugin</groupId>
-    <artifactId>gruntTaskRunner</artifactId>
-    <version>0.4.0</version>
+    <artifactId>externalTasksRunner</artifactId>
+    <version>0.5-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
-    <name>Grunt tasks runner Plugin</name>
+    <name>External tasks runner Plugin</name>
 
 
     <properties>
