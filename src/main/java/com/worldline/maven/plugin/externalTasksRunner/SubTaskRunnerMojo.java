@@ -13,7 +13,8 @@ import java.io.File;
 import java.io.IOException;
 
 /*
- * Copyright 2013 Frédéric Langlade
+ * Copyright 2013-2014 Frédéric Langlade <frederic.langlade@atos.net>
+ *                     Adrien Plagnol <adrien.plagnol@atos.net>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +53,7 @@ public class SubTaskRunnerMojo extends AbstractMojo {
      * @required
      * @readonly
      */
-	@Parameter(property = "grunt-maven.basedir", defaultValue = "${project-basedir}")
+	@Parameter(property = "external-tasks-maven.basedir", defaultValue = "${project-basedir}")
 	protected File basedir;
 
 
