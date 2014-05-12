@@ -52,7 +52,8 @@ public class SubTaskRunnerMojo extends AbstractMojo {
      * @required
      * @readonly
      */
-    protected File basedir;
+	@Parameter(property = "grunt-maven.basedir", defaultValue = "${project-basedir}")
+	protected File basedir;
 
 
     private org.apache.maven.project.MavenProject mavenProject;
