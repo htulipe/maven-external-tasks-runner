@@ -1,4 +1,4 @@
-package com.worldline.maven.plugin.gruntTaskRunner;
+package com.worldline.maven.plugin.externalTasksRunner;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -7,7 +7,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.commons.exec.PumpStreamHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,13 +33,16 @@ public class SubTaskInitializerMojo extends AbstractMojo {
     String osName;
 
     @Parameter( defaultValue = "npm", required = true )
-    String npmExec;
+    String initExecutable; // ie npm
+
+    @Parameter( defaultValue = "install", required = true )
+    String initTask; // ie install
 
     /** @parameter default-value="${project}" */
     private org.apache.maven.project.MavenProject mavenProject;
 
     public void execute() throws MojoExecutionException {
-        executeCommand( npmExec + " install" );
+        executeCommand( initExecutable + " " + initTask );
     }
 
     /** Base working directory.

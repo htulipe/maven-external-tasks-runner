@@ -1,4 +1,4 @@
-package com.worldline.maven.plugin.gruntTaskRunner;
+package com.worldline.maven.plugin.externalTasksRunner;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -8,9 +8,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.commons.exec.PumpStreamHandler;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -35,10 +33,13 @@ public class SubTaskRunnerMojo extends AbstractMojo {
     @Parameter( defaultValue = "${os.name}", readonly = true)
     String osName;
 
-    @Parameter( defaultValue = "grunt --no-color", required = true )
-    String gruntExec;
+    @Parameter( required = false )
+    String taskRunnerPath;
 
-    @Parameter( defaultValue = "default", required = true )
+    @Parameter( required = true)
+    String taskRunnerName;
+
+    @Parameter( required = true )
     String task;
 
     @Parameter( defaultValue = " ", required = true )
@@ -61,8 +62,21 @@ public class SubTaskRunnerMojo extends AbstractMojo {
         if ( System.getProperty("env") != null ) {
             params += "--env=" + System.getProperty("env");
         }
-        params += " " +additionalParameters;
-        executeCommand( gruntExec + " " + task + " " + params, task );
+        params += " " + defaultParamsFor(taskRunnerName) + " " + additionalParameters;
+
+        if (taskRunnerPath == null) {
+            taskRunnerPath = taskRunnerName;
+        }
+
+        executeCommand( taskRunnerPath + " " + task + " " + params, task );
+    }
+
+    private String defaultParamsFor(String taskRunnerName) {
+        if (taskRunnerName == "grunt") {
+            return "--no-color";
+        }
+
+        return "";
     }
 
     void executeCommand( String command, String taskName ) throws MojoExecutionException {
