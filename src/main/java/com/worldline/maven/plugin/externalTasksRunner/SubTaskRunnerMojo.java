@@ -46,6 +46,11 @@ public class SubTaskRunnerMojo extends AbstractMojo {
     @Parameter( defaultValue = " ", required = true )
     String additionalParameters;
 
+    @Parameter( defaultValue = "false", required = true)
+    Boolean isTestPhase;
+
+    @Parameter(property = "maven.test.failure.ignore", defaultValue = "false")
+    Boolean ignoreTestsResults;
 
     /** Base working directory.
      *
@@ -56,10 +61,20 @@ public class SubTaskRunnerMojo extends AbstractMojo {
 	@Parameter(property = "external-tasks-maven.basedir", defaultValue = "${project-basedir}")
 	protected File basedir;
 
+    @Parameter(property = "skipTests", defaultValue = "false")
+    protected Boolean isSkippingTests;
+
+    @Parameter(property = "maven.test.skip", defaultValue = "false")
+    protected Boolean isSkippingTestsAlt;
+
 
     private org.apache.maven.project.MavenProject mavenProject;
 
     public void execute() throws MojoExecutionException {
+        if (isTestPhase && (isSkippingTests || isSkippingTestsAlt)) {
+            getLog().info("skipping tests");
+            return;
+        }
         String params = "";
         if ( System.getProperty("env") != null ) {
             params += "--env=" + System.getProperty("env");
@@ -94,7 +109,13 @@ public class SubTaskRunnerMojo extends AbstractMojo {
             executor.execute( cmdLine );
         } catch (ExecuteException e) {
             getLog().error( "Task not found or failure : " + taskName );
-            throw new MojoExecutionException( "Task not found or failure : " + taskName );
+
+            if (isTestPhase && ignoreTestsResults) {
+                getLog().warn("ignoring tests result");
+            } else {
+                throw new MojoExecutionException( "Task not found or failure : " + taskName );
+            }
+
         } catch (IOException e) {
             throw new MojoExecutionException( "Unknown error when running grunt", e );
         }
