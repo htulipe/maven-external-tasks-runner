@@ -1,8 +1,8 @@
-# Grunt Tasks Runner Maven Plugin
+# External Tasks Runner -- Maven Plugin
 
 ## Description
 
-This plugin allows you to easily bind a grunt task to a given Maven phase.
+This plugin allows you to easily bind an external task to a given Maven phase.
 
 
 ## Usage
@@ -15,6 +15,9 @@ Add a plugin section to your pom.xml :
                     <groupId>com.worldline.maven.plugin</groupId>
                     <artifactId>gruntTaskRunner</artifactId>
                     <version>0.1-SNAPSHOT</version>
+                    <configuration>
+                        <taskRunnerName>grunt</taskRunnerName>
+                    </configuration>
                     <executions>
                           <execution>
                                 <id>init</id>
@@ -28,6 +31,7 @@ Add a plugin section to your pom.xml :
                                 <phase>test</phase>
                                 <configuration>
                                     <task>my-grunt-task</task>
+                                    <test>true</test>
                                 </configuration>
                           </execution>
                     </executions>
@@ -44,5 +48,6 @@ This snippet will run the grunt task "my-grunt-task" when the test phase is reac
 
 Written by :
     * Frédéric Langlade-Bellone (a546116) <frederic.langlade@worldline.net>
+    * Adrien Plagnol <adrien.plagnol@worldline.net>
 
 
