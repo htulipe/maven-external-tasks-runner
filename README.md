@@ -4,6 +4,7 @@
 
 This plugin allows you to easily bind an external task to a given Maven phase.
 
+For now it has been used only with *grunt* and *gulp* but it should work with any tasks runner.
 
 ## Usage
 
@@ -42,9 +43,21 @@ Add a plugin section to your pom.xml :
 This snippet will run the grunt task "my-grunt-task" when the test phase is reached.
 
 
+## Unit testing
+
+To get full unit testing support (including Jenkins reports) you need to use
+a xunit compatible reporter with your unit testing (mochajs has one).
+For instance you could have one task named test in your gruntfile which corresponds
+to local unit testing with any fancy reporters you'd like to use, and another task
+called test-xunit using the xunit reporter and which is called by your pom.xml on the
+test phase.
+
+This task should write its output in a xml file in a path known by your Jenkins instance.
+
+
 # Copyright
 
-(c) 2013, Worldline By Atos
+(c) 2014, Worldline By Atos
 
 Written by :
     * Frédéric Langlade-Bellone (a546116) <frederic.langlade@worldline.net>
