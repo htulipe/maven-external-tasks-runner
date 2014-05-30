@@ -60,7 +60,7 @@ This task should write its output in a xml file in a path known by your Jenkins 
 (c) 2014, Worldline By Atos
 
 Written by :
-    * Frédéric Langlade-Bellone (a546116) <frederic.langlade@worldline.net>
-    * Adrien Plagnol <adrien.plagnol@worldline.net>
+ - Frédéric Langlade-Bellone (a546116) <frederic.langlade@worldline.net>
+ - Adrien Plagnol <adrien.plagnol@worldline.net>
 
 
