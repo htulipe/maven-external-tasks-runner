@@ -14,8 +14,8 @@ Add a plugin section to your pom.xml :
 		<plugins>
               <plugin>
                     <groupId>com.worldline.maven.plugin</groupId>
-                    <artifactId>gruntTaskRunner</artifactId>
-                    <version>0.1-SNAPSHOT</version>
+                    <artifactId>external-tasks-runner</artifactId>
+                    <version>0.5.1</version>
                     <configuration>
                         <taskRunnerName>grunt</taskRunnerName>
                     </configuration>
