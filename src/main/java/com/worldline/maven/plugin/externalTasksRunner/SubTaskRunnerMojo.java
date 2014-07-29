@@ -42,7 +42,7 @@ public class SubTaskRunnerMojo extends AbstractMojo {
      * @required
      * @readonly
      */
-	@Parameter(property = "external-tasks-maven.basedir", defaultValue = "${project-basedir}")
+	@Parameter(property = "external-tasks-maven.basedir", defaultValue = "${project.basedir}")
 	protected File basedir;
 
     @Parameter(property = "skipTests", defaultValue = "false")
